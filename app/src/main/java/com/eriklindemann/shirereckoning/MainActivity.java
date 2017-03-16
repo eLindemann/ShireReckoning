@@ -30,17 +30,11 @@ public class MainActivity extends AppCompatActivity {
         TextView dateDayAndMonth = (TextView) findViewById(R.id.date_view_date);
         TextView dateAgeAndYear = (TextView) findViewById(R.id.date_view_year);
 
-        // TODO convert date to hobbit calendar
+        Reckoning reckoning = new Reckoning();
 
-        Calendar c = Calendar.getInstance();
-
-        SimpleDateFormat weekday = new SimpleDateFormat(SimpleDateFormat.WEEKDAY);
-        SimpleDateFormat monthAndDay = new SimpleDateFormat(SimpleDateFormat.MONTH_DAY);
-        SimpleDateFormat year = new SimpleDateFormat(SimpleDateFormat.YEAR);
-
-        dateWeekday.setText(weekday.format(c.getTime()));
-        dateDayAndMonth.setText(monthAndDay.format(c.getTime()));
-        dateAgeAndYear.setText(year.format(c.getTime()));
+        dateWeekday.setText(reckoning.getShireWeekday());
+        dateDayAndMonth.setText(reckoning.getDayAndMonth());
+        dateAgeAndYear.setText(reckoning.getYearAndAge());
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
