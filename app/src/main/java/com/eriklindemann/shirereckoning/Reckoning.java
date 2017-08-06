@@ -23,11 +23,11 @@ class Reckoning {
         setLeapYear(thisYear);
         this.shireYear = thisYear;
         this.ardaAge = 0;
-        if (thisYear >= 1954) {
-            shireYear -= 1953;
+        if (thisYear >= 1945) {
+            shireYear -= 1944;
             ardaAge = 7;
         }
-        if (thisYear < 1954 && thisYear >= 445) {
+        if (thisYear < 1945 && thisYear >= 445) {
             shireYear -= 444;
             ardaAge = 6;
         }
