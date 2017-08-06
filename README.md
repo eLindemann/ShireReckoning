@@ -15,4 +15,4 @@ There are a few different parts to the process of converting one of our dates (i
 
 There are features planned for this app. In its current state it only tells today's date in Shire Reckoning. Future releases plan to have the ability to save dates, perhaps a changing background color based on the date of the year (maybe reflecting colors of the seasons), and maybe even a widget. Of course, I am also open to ideas. Feel free to make a pull request if you'd like to work with the code. If you wish to contribute, that's awesome. I'd live to see what the community can do.
 
-If you wish to use the calculation code for your own purposes, I request that you give credit where it's due. DBAA.
+If you wish to use the calculation code for your own purposes, I request that you give credit where it's due. <a href="https://www.urbandictionary.com/define.php?term=DBAA">DBAA</a>.
