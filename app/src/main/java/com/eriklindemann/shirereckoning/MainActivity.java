@@ -1,5 +1,6 @@
 package com.eriklindemann.shirereckoning;
 
+import android.content.Context;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -35,16 +37,6 @@ public class MainActivity extends AppCompatActivity {
         dateWeekday.setText(reckoning.getShireWeekday());
         dateDayAndMonth.setText(reckoning.getDayAndMonth());
         dateAgeAndYear.setText(reckoning.getYearAndAge());
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -64,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.action_save_date) {
+            Context context = MainActivity.this;
+            String message = "Date Saved!";
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);

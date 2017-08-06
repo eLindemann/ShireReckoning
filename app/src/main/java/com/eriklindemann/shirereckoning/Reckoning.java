@@ -164,23 +164,25 @@ class Reckoning {
         String dayOfTheWeek = weekday.format(c.getTime());
         String weekDay = "Sterday";
 
-        if (dayOfTheWeek.matches("Sunday")) {
-            weekDay = "Sunday";
-        }
-        if (dayOfTheWeek.matches("Monday")) {
-            weekDay = "Monday";
-        }
-        if (dayOfTheWeek.matches("Tuesday")) {
-            weekDay = "Trewsday";
-        }
-        if (dayOfTheWeek.matches("Wednesday")) {
-            weekDay = "Hevensday";
-        }
-        if (dayOfTheWeek.matches("Thursday")) {
-            weekDay = "Mersday";
-        }
-        if (dayOfTheWeek.matches("Friday")) {
-            weekDay = "Highday";
+        switch (dayOfTheWeek) {
+            case "Sunday":
+                weekDay = "Sunday";
+                break;
+            case "Monday":
+                weekDay = "Monday";
+                break;
+            case "Tuesday":
+                weekDay = "Trewsday";
+                break;
+            case "Wednesday":
+                weekDay = "Hevensday";
+                break;
+            case "Thursday":
+                weekDay = "Mersday";
+                break;
+            case "Friday":
+                weekDay = "Highday";
+                break;
         }
 
         return weekDay;
@@ -188,26 +190,28 @@ class Reckoning {
 
     String getYearAndAge() {
         String getAge = "";
-        if (ardaAge == 1) {
-            getAge = "First Age";
-        }
-        if (ardaAge == 2) {
-            getAge = "Second Age";
-        }
-        if (ardaAge == 3) {
-            getAge = "Third Age";
-        }
-        if (ardaAge == 4) {
-            getAge = "Fourth Age";
-        }
-        if (ardaAge == 5) {
-            getAge = "Fifth Age";
-        }
-        if (ardaAge == 6) {
-            getAge = "Sixth Age";
-        }
-        if (ardaAge == 7) {
-            getAge = "Seventh Age";
+        switch(ardaAge) {
+            case 1:
+                getAge = "First Age";
+                break;
+            case 2:
+                getAge = "Second Age";
+                break;
+            case 3:
+                getAge = "Third Age";
+                break;
+            case 4:
+                getAge = "Fourth Age";
+                break;
+            case 5:
+                getAge = "Fifth Age";
+                break;
+            case 6:
+                getAge = "Sixth Age";
+                break;
+            case 7:
+                getAge = "Seventh Age";
+                break;
         }
 
         return getAge + " " + shireYear;
@@ -215,47 +219,49 @@ class Reckoning {
 
     String getDayAndMonth() {
         String getMonth = "";
-        if (shireMonth == 0) {
-            getMonth = "Yule";
-        }
-        if (shireMonth == 1) {
-            getMonth = "Afteryule";
-        }
-        if (shireMonth == 2) {
-            getMonth = "Solmath";
-        }
-        if (shireMonth == 3) {
-            getMonth = "Rethe";
-        }
-        if (shireMonth == 4) {
-            getMonth = "Astron";
-        }
-        if (shireMonth == 5) {
-            getMonth = "Thrimidge";
-        }
-        if (shireMonth == 6) {
-            getMonth = "Forelithe";
-        }
-        if (shireMonth == 7) {
-            getMonth = "Lithe";
-        }
-        if (shireMonth == 8) {
-            getMonth = "Afterlithe";
-        }
-        if (shireMonth == 9) {
-            getMonth = "Wedmath";
-        }
-        if (shireMonth == 10) {
-            getMonth = "Halimath";
-        }
-        if (shireMonth == 11) {
-            getMonth = "Winterfilth";
-        }
-        if (shireMonth == 12) {
-            getMonth = "Blotmath";
-        }
-        if (shireMonth == 13) {
-            getMonth = "Foreyule";
+        switch (shireMonth) {
+            case 0:
+                getMonth = "Yule";
+                break;
+            case 1:
+                getMonth = "Afteryule";
+                break;
+            case 2:
+                getMonth = "Solmath";
+                break;
+            case 3:
+                getMonth = "Rethe";
+                break;
+            case 4:
+                getMonth = "Astron";
+                break;
+            case 5:
+                getMonth = "Thrimidge";
+                break;
+            case 6:
+                getMonth = "Forelithe";
+                break;
+            case 7:
+                getMonth = "Lithe";
+                break;
+            case 8:
+                getMonth = "Afterlithe";
+                break;
+            case 9:
+                getMonth = "Wedmath";
+                break;
+            case 10:
+                getMonth = "Halimath";
+                break;
+            case 11:
+                getMonth = "Winterfilth";
+                break;
+            case 12:
+                getMonth = "Blotmath";
+                break;
+            case 13:
+                getMonth = "Foreyule";
+                break;
         }
 
         String getDayAndMonth = shireDay + " " + getMonth;
