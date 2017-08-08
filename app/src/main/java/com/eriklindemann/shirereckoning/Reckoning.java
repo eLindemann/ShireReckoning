@@ -6,71 +6,28 @@ import java.util.Calendar;
 
 class Reckoning {
     private Calendar c;
-    private boolean leapYear;
+    private boolean isLeapYear;
     private int shireDay;
     private int shireMonth;
     private int shireYear;
     private int ardaAge;
 
     Reckoning() {
-        this.c = Calendar.getInstance();
-        setDate();
+        c = Calendar.getInstance();
     }
 
-    private void setYear() {
-        SimpleDateFormat year = new SimpleDateFormat("yyyy");
-        int thisYear = Integer.parseInt(year.format(c.getTime()));
-        setLeapYear(thisYear);
-        this.shireYear = thisYear;
-        this.ardaAge = 0;
-        if (thisYear >= 1945) {
-            shireYear -= 1944;
-            ardaAge = 7;
-        }
-        if (thisYear < 1945 && thisYear >= 445) {
-            shireYear -= 444;
-            ardaAge = 6;
-        }
-        if (thisYear < 445 && thisYear >= -1103) {
-            shireYear += 1104;
-            ardaAge = 5;
-        }
-        if (thisYear < -1103 && thisYear >= -3102) {
-            shireYear += 3102;
-            ardaAge = 4;
-        }
-        if (thisYear < -3102 && thisYear >= -6122) {
-            shireYear += 6122;
-            ardaAge = 3;
-        }
-        if (thisYear < -6122 && thisYear >= -9563) {
-            shireYear += 9563;
-            ardaAge = 2;
-        }
-        if (thisYear < -9563 && thisYear >= -730153) {
-            shireYear += 730153;
-            ardaAge = 1;
-        }
+    void setCalendar(int year, int month, int day) {
+        c.set(year, month, day);
     }
 
-    private void setLeapYear(int year) {
-        if (year%4 != 0) {
-            leapYear = false;
-        } else if (year%100 == 0) {
-            if (year%400 != 0) {
-                leapYear = false;
-            } else if (year%400 == 0) {
-                leapYear = true;
-            }
-        } else if (year%4 == 0) {
-            leapYear = true;
-        }
+    void reckonDate(){
+        setReckoningDate();
+        setReckoningYear();
     }
 
-    private void setDate() {
+    private void setReckoningDate() {
         SimpleDateFormat day = new SimpleDateFormat("D");
         int dayOfYear = Integer.parseInt(day.format(c.getTime()));
-        setYear();
         this.shireDay = 0;
         this.shireMonth = 0;
         if (ardaAge == 3) {
@@ -78,7 +35,7 @@ class Reckoning {
         }
         int currentDay = dayOfYear + 11;
         if (currentDay > 183) {
-            if (!leapYear) {
+            if (!isLeapYear) {
                 currentDay += 1;
             }
         }
@@ -159,7 +116,57 @@ class Reckoning {
         }
     }
 
-    String getShireWeekday() {
+    private void setReckoningYear() {
+        SimpleDateFormat year = new SimpleDateFormat("yyyy");
+        int thisYear = Integer.parseInt(year.format(c.getTime()));
+        setCalendarLeapYear(thisYear);
+        this.shireYear = thisYear;
+        this.ardaAge = 0;
+        if (thisYear >= 1945) {
+            shireYear -= 1944;
+            ardaAge = 7;
+        }
+        if (thisYear < 1945 && thisYear >= 445) {
+            shireYear -= 444;
+            ardaAge = 6;
+        }
+        if (thisYear < 445 && thisYear >= -1103) {
+            shireYear += 1104;
+            ardaAge = 5;
+        }
+        if (thisYear < -1103 && thisYear >= -3102) {
+            shireYear += 3102;
+            ardaAge = 4;
+        }
+        if (thisYear < -3102 && thisYear >= -6122) {
+            shireYear += 6122;
+            ardaAge = 3;
+        }
+        if (thisYear < -6122 && thisYear >= -9563) {
+            shireYear += 9563;
+            ardaAge = 2;
+        }
+        if (thisYear < -9563 && thisYear >= -730153) {
+            shireYear += 730153;
+            ardaAge = 1;
+        }
+    }
+
+    private void setCalendarLeapYear(int year) {
+        if (year%4 != 0) {
+            isLeapYear = false;
+        } else if (year%100 == 0) {
+            if (year%400 != 0) {
+                isLeapYear = false;
+            } else if (year%400 == 0) {
+                isLeapYear = true;
+            }
+        } else if (year%4 == 0) {
+            isLeapYear = true;
+        }
+    }
+
+    String getReckoningWeekday() {
         SimpleDateFormat weekday = new SimpleDateFormat(SimpleDateFormat.WEEKDAY);
         String dayOfTheWeek = weekday.format(c.getTime());
         String weekDay = "Sterday";
@@ -188,7 +195,7 @@ class Reckoning {
         return weekDay;
     }
 
-    String getYearAndAge() {
+    String getReckoningAge() {
         String getAge = "";
         switch(ardaAge) {
             case 1:
@@ -217,7 +224,7 @@ class Reckoning {
         return getAge + " " + shireYear;
     }
 
-    String getDayAndMonth() {
+    String getReckoningDayAndMonth() {
         String getMonth = "";
         switch (shireMonth) {
             case 0:

@@ -1,23 +1,13 @@
 package com.eriklindemann.shirereckoning;
 
 import android.content.Context;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,10 +23,12 @@ public class MainActivity extends AppCompatActivity {
         TextView dateAgeAndYear = (TextView) findViewById(R.id.date_view_year);
 
         Reckoning reckoning = new Reckoning();
+        // reckoning.setCalendar(2001, 12, 19);
+        reckoning.reckonDate();
 
-        dateWeekday.setText(reckoning.getShireWeekday());
-        dateDayAndMonth.setText(reckoning.getDayAndMonth());
-        dateAgeAndYear.setText(reckoning.getYearAndAge());
+        dateWeekday.setText(reckoning.getReckoningWeekday());
+        dateDayAndMonth.setText(reckoning.getReckoningDayAndMonth());
+        dateAgeAndYear.setText(reckoning.getReckoningAge());
     }
 
     @Override
@@ -54,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) { // TODO: Make actual settings to set.
             return true;
         }
 
         if (id == R.id.action_save_date) {
             Context context = MainActivity.this;
-            String message = "Date Saved!";
+            String message = "Date Saved!";  // TODO: Save a set calendar date to DB for later retrieval.
             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         }
 
