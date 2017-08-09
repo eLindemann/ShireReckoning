@@ -1,15 +1,18 @@
 package com.eriklindemann.shirereckoning;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    int[] currentDate;
+
+    public static final String EXTRA_DATA = "com.eriklindemann.shirereckoning.DATE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,17 +21,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        TextView dateGregorian = (TextView) findViewById(R.id.date_view_gregorian);
         TextView dateWeekday = (TextView) findViewById(R.id.date_view_day);
         TextView dateDayAndMonth = (TextView) findViewById(R.id.date_view_date);
         TextView dateAgeAndYear = (TextView) findViewById(R.id.date_view_year);
 
-        Reckoning reckoning = new Reckoning();
-        // reckoning.setCalendar(2001, 12, 19);
-        reckoning.reckonDate();
+        Reckoning reckon = new Reckoning();
+// Testing dates        reckon.setCalendar(2012, 10, 22);
+        reckon.reckonDate();
+        currentDate = reckon.getDateArray();
 
-        dateWeekday.setText(reckoning.getReckoningWeekday());
-        dateDayAndMonth.setText(reckoning.getReckoningDayAndMonth());
-        dateAgeAndYear.setText(reckoning.getReckoningAge());
+        dateGregorian.setText(currentDate[0] + "/" + currentDate[1] + "/" + currentDate[2]);
+        dateWeekday.setText(reckon.getReckoningWeekday());
+        dateDayAndMonth.setText(reckon.getReckoningDayAndMonth());
+        dateAgeAndYear.setText(reckon.getReckoningAge());
+    }
+
+    public void saveDisplayedDate(View view) {
+        Intent intent = new Intent(this, CustomDateActivity.class);
+        intent.putExtra(EXTRA_DATA, currentDate);
+        startActivity(intent);
     }
 
     @Override
@@ -48,12 +60,6 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) { // TODO: Make actual settings to set.
             return true;
-        }
-
-        if (id == R.id.action_save_date) {
-            Context context = MainActivity.this;
-            String message = "Date Saved!";  // TODO: Save a set calendar date to DB for later retrieval.
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);

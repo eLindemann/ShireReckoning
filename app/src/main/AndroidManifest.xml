@@ -22,7 +22,14 @@
         <activity
             android:name=".Mealtimes"
             android:label="@string/title_activity_mealtimes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CustomDateActivity"
+            android:label="@string/title_activity_custom_date"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

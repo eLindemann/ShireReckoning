@@ -17,7 +17,8 @@ class Reckoning {
     }
 
     void setCalendar(int year, int month, int day) {
-        c.set(year, month, day);
+        c.clear();
+        c.set(year, month-1, day); // Calendar.MONTH is 0-based
     }
 
     void reckonDate(){
@@ -25,24 +26,21 @@ class Reckoning {
         setReckoningYear();
     }
 
-    private void setReckoningDate() {
+    private void setReckoningDate() { // TODO: Think on this. There is probably a cleaner/simpler way.
         SimpleDateFormat day = new SimpleDateFormat("D");
         int dayOfYear = Integer.parseInt(day.format(c.getTime()));
         this.shireDay = 0;
         this.shireMonth = 0;
-        if (ardaAge == 3) {
-            shireYear = shireYear - 1600;
+        int currentDay = dayOfYear + 10; // The Shire year starts on 22 December Gregorian
+        if (currentDay > 366) { // If dayOfYear + 10 is > 366, we subtract 366 to bring synchronize
+            currentDay -= 366;
         }
-        int currentDay = dayOfYear + 11;
-        if (currentDay > 183) {
+        /*if (currentDay > 183) { // Leap Year matters for Lithe, unfortunately it's ruining things...
             if (!isLeapYear) {
                 currentDay += 1;
             }
-        }
-        if (currentDay > 366) {
-            currentDay -= 366;
-        }
-        if (currentDay == 1) {
+        }*/
+        if (currentDay == 1) { // Month 0 = Yule, this is December 22
             shireDay = 2;
             shireMonth = 0;
         }
@@ -110,7 +108,7 @@ class Reckoning {
             shireDay = currentDay - 335;
             shireMonth = 13;
         }
-        if (currentDay == 366) {
+        if (currentDay == 366) { // December 21
             shireDay = 1;
             shireMonth = 0;
         }
@@ -150,6 +148,9 @@ class Reckoning {
             shireYear += 730153;
             ardaAge = 1;
         }
+        /*if (ardaAge == 3) {
+            shireYear = shireYear - 1600; // I don't know why this was in the code...
+        }*/
     }
 
     private void setCalendarLeapYear(int year) {
@@ -278,5 +279,15 @@ class Reckoning {
             getDayAndMonth = "Overlithe";
         }
         return getDayAndMonth;
+    }
+
+    int[] getDateArray() {
+        SimpleDateFormat year = new SimpleDateFormat("yyyy");
+            int thisYear = Integer.parseInt(year.format(c.getTime()));
+        SimpleDateFormat month = new SimpleDateFormat("MM");
+            int thisMonth = Integer.parseInt(month.format(c.getTime()));
+        SimpleDateFormat day = new SimpleDateFormat("dd");
+            int thisDay = Integer.parseInt(day.format(c.getTime()));
+        return new int[] {thisYear, thisMonth, thisDay};
     }
 }
