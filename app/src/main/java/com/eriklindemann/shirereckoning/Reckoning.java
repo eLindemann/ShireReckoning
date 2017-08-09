@@ -1,8 +1,11 @@
 package com.eriklindemann.shirereckoning;
 
 import android.icu.text.SimpleDateFormat;
+import android.util.Log;
+import android.webkit.ConsoleMessage;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 class Reckoning {
     private Calendar c;
@@ -17,7 +20,18 @@ class Reckoning {
     }
 
     void setCalendar(int year, int month, int day) {
-        c.clear();
+        setCalendar(year, month, day, false);
+        Log.i("setCalendar", "No isBeforeCommonEra parameter given - passing as false");
+    }
+
+    void setCalendar(int year, int month, int day, boolean isBeforeCommonEra) {
+        c.clear(); // Clear the current calendar object
+
+        if (isBeforeCommonEra) {
+            c.set(Calendar.ERA, GregorianCalendar.BC);
+        }
+        else c.set(Calendar.ERA, GregorianCalendar.AD);
+
         c.set(year, month-1, day); // Calendar.MONTH is 0-based
     }
 
@@ -118,7 +132,17 @@ class Reckoning {
         SimpleDateFormat year = new SimpleDateFormat("yyyy");
         int thisYear = Integer.parseInt(year.format(c.getTime()));
         setCalendarLeapYear(thisYear);
+
+        SimpleDateFormat era = new SimpleDateFormat("G");
+        String getEra = era.format(c.getTime());
+        Log.i("setReckoningYear", "getEra = " + getEra);
+        if (getEra.equals("BC")){
+            thisYear -= thisYear*2;
+            Log.i("setReckoningYear", "getEra returned BC, thisYear =" + thisYear);
+        }
         this.shireYear = thisYear;
+
+
         this.ardaAge = 0;
         if (thisYear >= 1945) {
             shireYear -= 1944;
@@ -167,28 +191,28 @@ class Reckoning {
         }
     }
 
-    String getReckoningWeekday() {
+    String getReckoningWeekday() { // Apparently their weekdays, while are similar to ours, fall on different days...
         SimpleDateFormat weekday = new SimpleDateFormat(SimpleDateFormat.WEEKDAY);
         String dayOfTheWeek = weekday.format(c.getTime());
         String weekDay = "Sterday";
 
         switch (dayOfTheWeek) {
-            case "Sunday":
+            case "Tuesday":
                 weekDay = "Sunday";
                 break;
-            case "Monday":
+            case "Wednesday":
                 weekDay = "Monday";
                 break;
-            case "Tuesday":
+            case "Thursday":
                 weekDay = "Trewsday";
                 break;
-            case "Wednesday":
+            case "Friday":
                 weekDay = "Hevensday";
                 break;
-            case "Thursday":
+            case "Saturday":
                 weekDay = "Mersday";
                 break;
-            case "Friday":
+            case "Sunday":
                 weekDay = "Highday";
                 break;
         }
@@ -284,10 +308,18 @@ class Reckoning {
     int[] getDateArray() {
         SimpleDateFormat year = new SimpleDateFormat("yyyy");
             int thisYear = Integer.parseInt(year.format(c.getTime()));
+        Log.i("getDateArray", "thisYear = " + thisYear);
         SimpleDateFormat month = new SimpleDateFormat("MM");
             int thisMonth = Integer.parseInt(month.format(c.getTime()));
+        Log.i("getDateArray", "thisMonth = " + thisMonth);
         SimpleDateFormat day = new SimpleDateFormat("dd");
             int thisDay = Integer.parseInt(day.format(c.getTime()));
-        return new int[] {thisYear, thisMonth, thisDay};
+        Log.i("getDateArray", "thisDay = " + thisDay);
+        SimpleDateFormat era = new SimpleDateFormat("G");
+            String getEra = era.format(c.getTime());
+        Log.i("getDateArray", "getEra = " + getEra);
+        int thisEra = 1;
+            if (getEra.equals("AD")) thisEra = 0;
+        return new int[] {thisYear, thisMonth, thisDay, thisEra};
     }
 }

@@ -5,6 +5,9 @@
     <string name="title_activity_custom_date">Save Date</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="default_date_gregorian">12.19.2001</string>
+    <string name="default_day_gregorian">DD</string>
+    <string name="default_month_gregorian">MM</string>
+    <string name="default_year_gregorian">YYYY</string>
     <string name="default_day">Sunday</string>
     <string name="default_date">14 Afteryule</string>
     <string name="default_year">Sixth Age, 64</string>

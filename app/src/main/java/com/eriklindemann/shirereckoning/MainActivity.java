@@ -27,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
         TextView dateAgeAndYear = (TextView) findViewById(R.id.date_view_year);
 
         Reckoning reckon = new Reckoning();
-// Testing dates        reckon.setCalendar(2012, 10, 22);
+//        reckon.setCalendar(2012, 10, 22, true);
         reckon.reckonDate();
         currentDate = reckon.getDateArray();
 
-        dateGregorian.setText(currentDate[0] + "/" + currentDate[1] + "/" + currentDate[2]);
+        dateGregorian.setText(currentDate[2] + "/" + currentDate[1] + "/" + currentDate[0]);
         dateWeekday.setText(reckon.getReckoningWeekday());
         dateDayAndMonth.setText(reckon.getReckoningDayAndMonth());
         dateAgeAndYear.setText(reckon.getReckoningAge());
