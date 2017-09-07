@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_today"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/navigation_drawer_date_today" />
+        <item
+            android:id="@+id/nav_reckon_date"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/navigation_drawer_reckon_a_date" />
+    </group>
+
+    <item android:title="@string/navigation_drawer_preferences">
+        <menu>
+            <item
+                android:id="@+id/nav_set_bree"
+                android:title="@string/navigation_drawer_set_bree" />
+        </menu>
+    </item>
+
+</menu>

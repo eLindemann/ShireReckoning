@@ -14,6 +14,7 @@ class Reckoning {
     private int shireMonth;
     private int shireYear;
     private int ardaAge;
+    private boolean isEastFarthing;
 
     Reckoning() {
         c = Calendar.getInstance();
@@ -191,6 +192,10 @@ class Reckoning {
         }
     }
 
+    private void setEastFarthing(boolean b) {
+        this.isEastFarthing = b;
+    }
+
     String getReckoningWeekday() { // Apparently their weekdays, while are similar to ours, fall on different days...
         SimpleDateFormat weekday = new SimpleDateFormat(SimpleDateFormat.WEEKDAY);
         String dayOfTheWeek = weekday.format(c.getTime());
@@ -249,54 +254,63 @@ class Reckoning {
         return getAge + " " + shireYear;
     }
 
-    String getReckoningDayAndMonth() {
-        String getMonth = "";
+    String getReckoningDayAndMonth() { // TODO: In The Eastfarthing/Bree, the months are named differently. Will have to make a preference for that.
+        String month = "";
         switch (shireMonth) {
             case 0:
-                getMonth = "Yule";
+                month = "Yule";
                 break;
             case 1:
-                getMonth = "Afteryule";
+                month = "Afteryule";
+                if (isEastFarthing) month = "Frery";
                 break;
             case 2:
-                getMonth = "Solmath";
+                month = "Solmath";
                 break;
             case 3:
-                getMonth = "Rethe";
+                month = "Rethe";
                 break;
             case 4:
-                getMonth = "Astron";
+                month = "Astron";
+                if (isEastFarthing) month = "Chithing";
                 break;
             case 5:
-                getMonth = "Thrimidge";
+                month = "Thrimidge";
                 break;
             case 6:
-                getMonth = "Forelithe";
+                month = "Forelithe";
+                if (isEastFarthing) month = "Lithe";
                 break;
             case 7:
-                getMonth = "Lithe";
+                month = "Lithe";
+                if (isEastFarthing) month = "The Summerdays";
                 break;
             case 8:
-                getMonth = "Afterlithe";
+                month = "Afterlithe";
+                if (isEastFarthing) month = "Mede";
                 break;
             case 9:
-                getMonth = "Wedmath";
+                month = "Wedmath";
                 break;
             case 10:
-                getMonth = "Halimath";
+                month = "Halimath";
+                if (isEastFarthing) month = "Harvestmath";
                 break;
             case 11:
-                getMonth = "Winterfilth";
+                month = "Winterfilth";
+                if (isEastFarthing) month = "Wintring";
                 break;
             case 12:
-                getMonth = "Blotmath";
+                month = "Blotmath";
+                if (isEastFarthing) month = "Blooting";
                 break;
             case 13:
-                getMonth = "Foreyule";
+                month = "Foreyule";
+                if (isEastFarthing) month = "Yulemath";
                 break;
         }
 
-        String getDayAndMonth = shireDay + " " + getMonth;
+        String getDayAndMonth = shireDay + " " + month;
         if (shireMonth == 7 && shireDay == 3) {
             getDayAndMonth = "Midyear's Day";
         } else if (shireMonth == 7 && shireDay == 4) {

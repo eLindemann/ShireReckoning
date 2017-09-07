@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4caf50</color>
-    <color name="colorPrimaryDark">#388e3c</color>
+    <color name="primaryColor">#8bc34a</color>
+    <color name="primaryLightColor">#bef67a</color>
+    <color name="primaryDarkColor">#5a9216</color>
+    <color name="primaryTextColor">#000000</color>
     <color name="colorAccent">#ffab40</color>
     <color name="colorPageBackground">#81c784</color>
-    <color name="colorDateText">#eeeeee</color>
+    <color name="colorDateText">#131313</color>
 </resources>
